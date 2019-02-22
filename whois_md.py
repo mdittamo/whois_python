@@ -57,15 +57,16 @@ def main():
                 worksheet = workbook.sheet_by_index(0)
                 columnid = 0;
                 for row_index in xrange(worksheet.nrows):
-                    test = worksheet.cell(columnid, 0).value
-                    wi = whois.whois(str(test))
+                    entries = worksheet.cell(columnid, 0).value
+                    wi = whois.whois(str(entries))
                     timestr = time.strftime("%Y%m%d-%H%M%S_")
-                    name = str(timestr + test)
+                    name = str(timestr + entries)
                     f = open('%s.txt' % name, 'w')
-                    f.write("Results for " + str(test) + "\n")
+                    f.write("Results for " + str(entries) + "\n")
                     f.write(str(wi))
                     f.close()
                     time.sleep(1)
+                    print ("Results have been written to " + timestr + entries)
                     columnid = columnid + 1
                 break
            except:
