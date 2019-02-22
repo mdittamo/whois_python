@@ -21,18 +21,22 @@ def main():
         selection = raw_input ("Enter [s] for single domain, [x] for Excel file or [q] to quit: ")
 
         if selection =='q':
+            print(Fore.YELLOW)
             print '-----' * 8
             print '------------Exiting program-------------'
             print '-----' * 8
+            print(Style.RESET_ALL)
             time.sleep(2.5)
             exit()
 
         if selection == 's':
             data = raw_input("Enter the domain or [q] to quit: ")
             if data == 'q':
+                print(Fore.YELLOW)
                 print '-----' * 8
                 print '------------Exiting program-------------'
                 print '-----' * 8
+                print(Style.RESET_ALL)
                 time.sleep(2.5)
                 exit()
 
@@ -70,7 +74,9 @@ def main():
                     columnid = columnid + 1
                 break
            except:
+                print(Fore.RED)
                 print('The file does not exist!')
+                print(Style.RESET_ALL)
                 time.sleep(2.5)
                 break
 while True:
@@ -83,8 +89,10 @@ while True:
     if answer == 'y':
         continue
     else:
+        print(Fore.YELLOW)
         print '-----' * 8
         print '------------Exiting program-------------'
         print '-----' * 8
+        print(Style.RESET_ALL)
         time.sleep(2.5)
         break
