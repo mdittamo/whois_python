@@ -29,29 +29,33 @@ def main():
             exit()
 
         if selection == 's':
-            data = raw_input("Enter the domain or [q] to quit: ")
-            if data == 'q':
-                print(Fore.YELLOW)
-                print '-----' * 8
-                print '------------Exiting program-------------'
-                print '-----' * 8
-                print(Style.RESET_ALL)
-                time.sleep(2.5)
-                exit()
+            data = raw_input("Enter the domain without http(s), :, or slashes or enter [q] to quit: ")
+            if '/' not in data:
+                if data == 'q':
+                    print(Fore.YELLOW)
+                    print '-----' * 8
+                    print '------------Exiting program-------------'
+                    print '-----' * 8
+                    print(Style.RESET_ALL)
+                    time.sleep(2.5)
+                    exit()
 
+                else:
+                    wi = whois.whois(data)
+                    timestr = time.strftime("%Y%m%d-%H%M%S_")
+                    name = str(timestr + data)
+                    f = open('%s.txt' % name, 'w')
+                    f.write("Results for " + str(data) + "\n")
+                    f.write(str(wi))
+                    f.close()
+                    print '-----' * 8
+                    print ("Results have been written to " + timestr + data)
+                    print '-----' * 8
+                    break
             else:
-                wi = whois.whois(data)
-                timestr = time.strftime("%Y%m%d-%H%M%S_")
-                name = str(timestr + data)
-                f = open('%s.txt' % name, 'w')
-                f.write("Results for " + str(data) + "\n")
-                f.write(str(wi))
-                f.close()
-                print '-----' * 8
-                print ("Results have been written to " + timestr + data)
-                print '-----' * 8
-                break
-
+                print (Fore.RED)
+                print ('Error: Do not include http(s), :, or slashes in your input.')
+                print (Style.RESET_ALL)
         elif selection == 'x':
 
            try:
@@ -74,7 +78,7 @@ def main():
                 break
            except:
                 print(Fore.RED)
-                print('The file does not exist!')
+                print('Error: The file does not exist.')
                 print(Style.RESET_ALL)
                 time.sleep(2.5)
                 break
@@ -84,7 +88,9 @@ while True:
         answer = raw_input('Would you like to run again? (y/n): ')
         if answer in ('y', 'n'):
             break
-        print 'Invalid input'
+        print (Fore.RED)
+        print 'Error: Invalid input'
+        print (Style.RESET_ALL)
     if answer == 'y':
         continue
     else:
