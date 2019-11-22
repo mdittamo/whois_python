@@ -30,7 +30,7 @@ def main():
 
         if selection == 's':
             data = raw_input("Enter the domain without http(s), :, or slashes or enter [q] to quit: ")
-            if '/' not in data:
+            if ('/' not in data) and (':' not in data) and ('http' not in data) and ('https' not in data):
                 if data == 'q':
                     print(Fore.YELLOW)
                     print '-----' * 8
